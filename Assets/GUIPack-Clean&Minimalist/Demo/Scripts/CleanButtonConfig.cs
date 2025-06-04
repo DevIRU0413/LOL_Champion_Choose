@@ -14,5 +14,11 @@ namespace Ricimi
         public float fadeTime = 0.2f;
         public float onHoverAlpha;
         public float onClickAlpha;
+
+        [Header("Clip")]
+        public AudioClip clickEnterClip;
+        public AudioClip clickExitClip;
+        public AudioClip clickDownClip;
+        public AudioClip clickUpClip;
     }
 }
