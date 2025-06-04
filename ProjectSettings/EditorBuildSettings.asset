@@ -8,4 +8,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/GUIPack-Clean&Minimalist/Demo/Scenes/Themes/Dark/Dark - Game.unity
+    guid: 3e961f553cad04680b4e67a97dbaf86a
+  - enabled: 1
+    path: Assets/GUIPack-Clean&Minimalist/Demo/Scenes/Themes/Dark/Dark - Home.unity
+    guid: 68c3b27ea42954caab63ca4b921ad14d
+  - enabled: 1
+    path: Assets/GUIPack-Clean&Minimalist/Demo/Scenes/Themes/Light/Light - Game.unity
+    guid: ed69d3f9b5a8e446896934f79e173d08
+  - enabled: 1
+    path: Assets/GUIPack-Clean&Minimalist/Demo/Scenes/Themes/Light/Light - Home.unity
+    guid: 99f809d9248fc47a89ada8356ab3acbb
+  - enabled: 1
+    path: Assets/GUIPack-Clean&Minimalist/Demo/Scenes/UI Elements/Buttons.unity
+    guid: 62ffc7e5ced894be88bc1351fad4dc72
+  - enabled: 1
+    path: Assets/Scenes/AppInitializeScene.unity
+    guid: 7f3da43833bf5aa4093a040991a4ff1b
+  - enabled: 1
+    path: Assets/Scenes/MainTitleScene.unity
+    guid: b6a793fc519a461449a11b086ac62725
+  - enabled: 1
+    path: Assets/GUIPack-Clean&Minimalist/Demo/Scenes/UI Elements/Icon Buttons.unity
+    guid: fe72ec13900874be09164522383fccb5
+  - enabled: 1
+    path: Assets/GUIPack-Clean&Minimalist/Demo/Scenes/UI Elements/UI Elements.unity
+    guid: 2251e98a2b6884910a270fcf7501d12d
   m_configObjects: {}
