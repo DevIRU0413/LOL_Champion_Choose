@@ -178,7 +178,7 @@ MonoBehaviour:
   destroyTime: 0.5
   m_backgroundImageTagName: BackgroundImage
   m_inventoryContent: {fileID: 6939937827789630870}
-  m_inventoryItem: {fileID: 1239124368738870086, guid: e4f24076405fd43759314a093e857abb,
+  m_inventoryItem: {fileID: 1400743504952838850, guid: 3cefc08a6c7d7694499f70464d7f854c,
     type: 3}
 --- !u!95 &6630414138848550946
 Animator:
