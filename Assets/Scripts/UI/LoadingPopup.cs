@@ -15,6 +15,9 @@ namespace Scripts.UI
         private RectTransform m_loadingUIRT;
         private RectTransform m_loadingBarRT;
 
+        private float loadProgress = 0.0f;
+        private float loadProgressSpeed = 1.0f;
+
         private void Start()
         {
             m_loadingUIRT = m_loadingUI.GetComponent<RectTransform>();
@@ -28,7 +31,9 @@ namespace Scripts.UI
             if (m_loadingBarRT != null)
             {
                 Debug.Log(SceneManagerEx.Instance.LoadProgress);
-                m_loadingBarRT.localScale = new(SceneManagerEx.Instance.LoadProgress, 1f, 1f);
+                loadProgress = Mathf.MoveTowards(loadProgress, SceneManagerEx.Instance.LoadProgress, loadProgressSpeed * Time.deltaTime);
+
+                m_loadingBarRT.localScale = new(loadProgress, 1f, 1f);
             }
         }
     }

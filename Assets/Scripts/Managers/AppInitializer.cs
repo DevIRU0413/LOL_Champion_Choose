@@ -102,6 +102,8 @@ namespace Scripts.Managers
             // 5. 챔피인 리스트의 챔피언 데이터에 이미지 할당
             foreach (var c in m_championList.data)
             {
+                yield return null;
+
                 var chamInfo = c.Value;
 
                 string portraitFilePath = Links.SavePortraitPath + Links.ChampionPortraitName(chamInfo.id);
@@ -144,6 +146,7 @@ namespace Scripts.Managers
 
                     ImageSaver.SaveTextureToPNG(chamInfo.splashSprite.texture, Links.SaveSplashPath, Links.ChampionSplashName(chamInfo.id));
                 }
+
             }
 
             DataStore.ForceInstance.SetChampionData(m_championList);

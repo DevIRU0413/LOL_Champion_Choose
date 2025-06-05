@@ -67,6 +67,8 @@ namespace Scripts.Managers
                 foreach (Func<IEnumerator> coroutineFunc in OnSceneBeforeChange)
                 {
                     yield return StartCoroutine(coroutineFunc());
+                    m_loadProgress += 0.7f / OnSceneBeforeChange.Count;
+                    yield return null;
                 }
             }
 

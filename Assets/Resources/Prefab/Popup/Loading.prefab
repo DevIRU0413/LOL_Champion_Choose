@@ -54,7 +54,7 @@ MonoBehaviour:
   backgroundColor: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 0.6}
   destroyTime: 0.5
   m_loadingUI: {fileID: 6102700751556792969}
-  m_loadingBar: {fileID: 6208062329843086911}
+  m_loadingBar: {fileID: 4960220763609010589}
 --- !u!95 &3385750255758376277
 Animator:
   serializedVersion: 5
@@ -314,6 +314,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3219938125114402629, guid: d2be05c017a94eb49b7d99ce137dc06a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3774467072343763874, guid: d2be05c017a94eb49b7d99ce137dc06a,
         type: 3}
       propertyPath: m_Name
@@ -324,15 +329,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2be05c017a94eb49b7d99ce137dc06a, type: 3}
---- !u!224 &5650634222978174280 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3183477463174156501, guid: d2be05c017a94eb49b7d99ce137dc06a,
+--- !u!1 &4960220763609010589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2778950222302940160, guid: d2be05c017a94eb49b7d99ce137dc06a,
     type: 3}
   m_PrefabInstance: {fileID: 7081609156422180253}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6208062329843086911 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3774467072343763874, guid: d2be05c017a94eb49b7d99ce137dc06a,
+--- !u!224 &5650634222978174280 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3183477463174156501, guid: d2be05c017a94eb49b7d99ce137dc06a,
     type: 3}
   m_PrefabInstance: {fileID: 7081609156422180253}
   m_PrefabAsset: {fileID: 0}
