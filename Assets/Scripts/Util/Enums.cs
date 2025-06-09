@@ -2,9 +2,12 @@
 {
     public enum SceneID
     {
-        AppInitialize,  // AppInitialize 0
-        Title,          // Title 1
-        Roulette,
+        None = 0,
+        LoadingScene, // 범용적인 로딩 시 사용
+        DataLoadingScene, // 개별적인 데이터 로드 시 사용
+        PrologScene,
+        MainTitleScene, 
+        RouletteScene,
     }
 
     // 게임 상태용
@@ -21,14 +24,14 @@
     {
         None,                   // Error
 
-        ResourceManager, // Manager
+        ResourceManager,        // Default Manager
         SceneManagerEx,
         AudioManager,
         UIManager,
 
-        AppInitializer,
+        DataStore,              // Data Manager
 
-        ChampionManager,
+        ChampionManager,        // Add Manager
         MonsterManager,
     }
 }

@@ -1,4 +1,8 @@
-﻿using Scripts.Managers;
+﻿using System;
+using System.Linq;
+
+using Scripts.Managers;
+using Scripts.Tool;
 using Scripts.Util;
 
 using UnityEngine;
@@ -10,15 +14,25 @@ namespace Scripts.Scene
         // 현재 씬의 고유 ID (상속 클래스에서 지정)
         public abstract SceneID SceneID { get; }
 
+        [SerializeField] private GameObject[] m_uiPrefabs;
+
         protected void Awake()
         {
-            Initialize();
             LoadManagers();
+            LoadUI();
+            Initialize();
         }
 
-        // 씬 초기화 (상속 클래스 구현)
         protected abstract void Initialize();
 
+        private void LoadUI()
+        {
+            foreach (GameObject go in m_uiPrefabs)
+                UIManager.Instance.SetupUI(go);
+
+            UIManager.Instance.SetupAllCanvas();
+        }
+        
         // 매니저 등록 및 초기화
         private void LoadManagers()
         {

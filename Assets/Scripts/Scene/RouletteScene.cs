@@ -4,7 +4,7 @@ namespace Scripts.Scene
 {
     public class RouletteScene : SceneBase
     {
-        public override SceneID SceneID => SceneID.Roulette;
+        public override SceneID SceneID => SceneID.RouletteScene;
 
         protected override void Initialize()
         {

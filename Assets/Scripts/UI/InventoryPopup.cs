@@ -3,6 +3,7 @@
 using Ricimi;
 
 using Scripts.Data;
+using Scripts.Managers;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,12 +19,12 @@ namespace Scripts.UI
 
         private Image m_backgroundImage; // 배경으로 사용되는 옵젝
         private RectTransform m_inventoryContentRT; // 인벤 콘텐트 RT
-        private List<GameObject> m_inventoryItemGos; // 
+        private List<GameObject> m_inventoryItemGos;
         private List<ChampionData> m_datas;
 
         private void Awake()
         {
-            m_datas = DataStore.Instance.GetListChampionAllData();
+            m_datas = DataStoreManager.Instance.GetListChampionAllData();
             m_inventoryContentRT = m_inventoryContent.GetComponent<RectTransform>();
 
             var bgGo = GameObject.FindGameObjectWithTag(m_backgroundImageTagName);

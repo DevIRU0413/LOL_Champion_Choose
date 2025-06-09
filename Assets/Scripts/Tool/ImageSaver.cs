@@ -15,7 +15,7 @@ namespace Scripts.Tool
 
             if (texture == null)
             {
-                Debug.LogWarning("❌ 저장 실패: Texture2D가 null이야");
+                Debug.LogWarning("❌ 저장 실패: Texture2D null");
                 return;
             }
 

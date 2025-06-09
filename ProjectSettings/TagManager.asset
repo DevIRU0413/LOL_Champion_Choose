@@ -5,8 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Manager
-  - Canvas
-  - BackgroundImage
+  - Background
   layers:
   - Default
   - TransparentFX

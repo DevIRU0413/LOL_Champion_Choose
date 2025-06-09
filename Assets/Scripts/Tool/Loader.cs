@@ -40,10 +40,10 @@ namespace Scripts.Tool
             {
                 Texture2D tex = DownloadHandlerTexture.GetContent(uwr);
                 Sprite sprite = Sprite.Create(
-                tex,
-                new Rect(0, 0, tex.width, tex.height),
-                new Vector2(0.5f, 0.5f)
-            );
+                    tex,
+                    new Rect(0, 0, tex.width, tex.height),
+                    new Vector2(0.5f, 0.5f)
+                );
                 callback?.Invoke(sprite);
             }
         }

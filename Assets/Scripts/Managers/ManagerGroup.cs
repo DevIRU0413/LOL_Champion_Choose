@@ -34,9 +34,10 @@ namespace Scripts.Managers
         #endregion
 
         #region PrivateVariables
-        private List<IManager> m_managers = new();
+        private List<IManager> m_unregisteredManagers  = new(); // 미등록
+        private List<IManager> m_registeredManagers = new(); // 등록됨
 
-        private bool m_isManagersInitialized = false;
+        private bool m_isManagersInitialized = false; // 초기화 중간 확인 및 매니저들 사용 여부 확인용
         #endregion
 
         #region PublicMethod
@@ -48,17 +49,22 @@ namespace Scripts.Managers
 
         public void RegisterManager(IManager manager)
         {
-            if (manager == null || m_managers.Contains(manager))
+            if (manager == null || m_registeredManagers.Contains(manager) || m_unregisteredManagers.Contains(manager))
                 return;
 
-            foreach (var m in m_managers)
+            foreach (var m in m_registeredManagers)
             {
                 if (m.Equals(manager))
                     return;
             }
 
-            m_managers.Add(manager);
-            manager.GetGameObject().transform.parent = transform;
+            foreach (var m in m_unregisteredManagers)
+            {
+                if (m.Equals(manager))
+                    return;
+            }
+
+            m_unregisteredManagers.Add(manager);
         }
 
         public void RegisterManager(GameObject managerObject)
@@ -79,41 +85,72 @@ namespace Scripts.Managers
         public void InitializeManagers()
         {
             m_isManagersInitialized = false;
-            SortManagersByPriorityAscending();
+            SortManagersByPriorityAscending(m_unregisteredManagers);
 
-            foreach (var manager in m_managers)
+            foreach (var manager in m_unregisteredManagers)
             {
                 manager.Initialize();
-
-                if (manager.GetGameObject() == null)
+                GameObject goM = manager.GetGameObject();
+                if (goM == null)
                 {
-                    m_managers.Remove(manager);
+                    Debug.LogError($"[Dnot Init] {goM.name} !!!");
                     continue;
                 }
-                Debug.Log($"[Init] {manager.GetGameObject().name}");
-                manager.GetGameObject().transform.parent = transform;
+
+                Debug.Log($"[Init] {goM.name}");
+                m_registeredManagers.Add(manager);
+                goM.transform.parent = transform;
             }
 
+            m_unregisteredManagers.Clear();
             m_isManagersInitialized = true;
         }
 
+        /// <summary>
+        /// 매니저들 내부 데이터 종료 처리 밎 정리
+        /// </summary>
         public void CleanupManagers()
         {
-            SortManagersByPriorityDescending();
-            for (int i = 0; i < m_managers.Count; i++)
+            for (int i = 0; i < m_registeredManagers.Count; i++)
             {
-                IManager manager = m_managers[i];
+                IManager manager = m_registeredManagers[i];
                 GameObject go = manager.GetGameObject();
 
                 if (go == null)
                 {
-                    m_managers.Remove(manager);
+                    m_registeredManagers.Remove(manager);
                     continue;
                 }
 
-                Debug.Log($"[Cleanup] {go.name}");
-
                 manager.Cleanup();
+                Debug.Log($"[Cleanup] {go.name}");
+            }
+        }
+
+        /// <summary>
+        /// 지속적인 생존이 필요하지 않은 매니저 정리
+        /// </summary>
+        /// <param name="forceClear">강제 정리 여부</param>
+        public void ClearManagers(bool forceClear = false)
+        {
+            for (int i = 0; i < m_registeredManagers.Count; i++)
+            {
+                IManager manager = m_registeredManagers[i];
+                if (!manager.IsDontDestroy || forceClear)
+                {
+                    GameObject go = manager.GetGameObject();
+
+                    if (go == null)
+                    {
+                        m_registeredManagers.Remove(manager);
+                        continue;
+                    }
+
+                    manager.Cleanup();
+                    string name = go.name;
+                    Destroy(go);
+                    Debug.Log($"[Clear] {name}");
+                }
             }
         }
 
@@ -121,59 +158,37 @@ namespace Scripts.Managers
         {
             ClearManagers(true);
         }
-
-        public void ClearManagers(bool forceClear = false)
-        {
-            for (int i = 0; i < m_managers.Count; i++)
-            {
-                IManager manager = m_managers[i];
-                if (!manager.IsDontDestroy || forceClear)
-                {
-                    GameObject go = manager.GetGameObject();
-
-                    if (go == null)
-                    {
-                        m_managers.Remove(manager);
-                        continue;
-                    }
-
-                    Debug.Log($"[Clear] {go.name}");
-
-                    Destroy(go);
-                }
-            }
-        }
         #endregion
 
         #region PrivateMethod
 
-        private void SortManagersByPriorityAscending()
+        private void SortManagersByPriorityAscending(List<IManager> list)
         {
-            for (int i = 0; i < m_managers.Count - 1; i++)
+            for (int i = 0; i < list.Count - 1; i++)
             {
-                for (int j = 0; j < m_managers.Count - i - 1; j++)
+                for (int j = 0; j < list.Count - i - 1; j++)
                 {
-                    if (m_managers[j].Priority > m_managers[j + 1].Priority)
+                    if (list[j].Priority > list[j + 1].Priority)
                     {
-                        IManager temp = m_managers[j];
-                        m_managers[j] = m_managers[j + 1];
-                        m_managers[j + 1] = temp;
+                        IManager temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
                     }
                 }
             }
         }
 
-        private void SortManagersByPriorityDescending()
+        private void SortManagersByPriorityDescending(List<IManager> list)
         {
-            for (int i = 0; i < m_managers.Count - 1; i++)
+            for (int i = 0; i < list.Count - 1; i++)
             {
-                for (int j = 0; j < m_managers.Count - i - 1; j++)
+                for (int j = 0; j < list.Count - i - 1; j++)
                 {
-                    if (m_managers[j].Priority < m_managers[j + 1].Priority)
+                    if (list[j].Priority < list[j + 1].Priority)
                     {
-                        IManager temp = m_managers[j];
-                        m_managers[j] = m_managers[j + 1];
-                        m_managers[j + 1] = temp;
+                        IManager temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
                     }
                 }
             }
